@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+model Company {
+  id String @id @default(cuid())
+  name String
+  address String?
+  email String?
+  phone String?
+  gstNumber String?
+  logoUrl String?
+  createdAt DateTime @default(now())
+  products Product[]
+  customers Customer[]
+  invoices Invoice[]
+}
+
+model Product {
+  id String @id @default(cuid())
+  name String
+  price Float
+  description String?
+  company Company @relation(fields: [companyId], references: [id])
+  companyId String
+  createdAt DateTime @default(now())
+}
+
+model Customer {
+  id String @id @default(cuid())
+  name String
+  email String?
+  phone String?
+  address String?
+  company Company @relation(fields : [companyId], references: [id])
+  companyId String 
+  invoices Invoice[]
+  createdAt DateTime @default(now())
+}
+
+model Invoice { 
+  id String @id @default(cuid())
+  number String @unique
+  companyId String
+  customerId String
+  issueDate DateTime
+  dueDate DateTime?
+  taxRate Float
+  discount Float
+  items Json
+  status InvoiceStatus @default(DRAFT)
+  createdAt DateTime @default(now())
+  company    Company       @relation(fields: [companyId], references: [id])
+  customer   Customer      @relation(fields: [customerId], references: [id])
+}
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+}
