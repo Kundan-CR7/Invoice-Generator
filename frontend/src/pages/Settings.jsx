@@ -260,40 +260,6 @@ export default function Settings() {
               />
             </div>
 
-            {/* Logo Upload */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-300 mb-2">Company Logo</label>
-              <div className="flex items-center gap-4">
-                {selectedLogo && (
-                  <div className="relative">
-                    <img src={selectedLogo} alt="Logo" className="w-20 h-20 rounded-lg object-cover" />
-                    <button
-                      onClick={() => {
-                        setSelectedLogo(null);
-                        setFormData(prev => ({ ...prev, logoUrl: "" }));
-                      }}
-                      className="absolute -top-2 -right-2 bg-red-600 rounded-full p-1 text-white hover:bg-red-700"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleLogoUpload}
-                  className="hidden"
-                  id="logo-upload"
-                />
-                <label
-                  htmlFor="logo-upload"
-                  className="px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white hover:bg-gray-600 cursor-pointer flex items-center gap-2"
-                >
-                  <Upload className="w-4 h-4" />
-                  Upload Logo
-                </label>
-              </div>
-            </div>
           </div>
 
           {/* Save Button */}
@@ -305,21 +271,6 @@ export default function Settings() {
           </div>
         </div>
       )}
-
-      {/* Additional Settings Section */}
-      <div className="bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-700">
-        <h2 className="text-xl font-semibold text-white mb-4">Appearance</h2>
-        <p className="text-gray-300 mb-4">Customize your invoice appearance</p>
-        <div className="flex items-center justify-between p-4 bg-gray-700 rounded-lg">
-          <div>
-            <p className="text-white font-medium">Dark Mode</p>
-            <p className="text-gray-400 text-sm">Interface is in dark mode</p>
-          </div>
-          <div className="w-12 h-6 bg-blue-600 rounded-full flex items-center justify-end px-1">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -142,7 +142,7 @@ export default function Dashboard() {
             Welcome back! Here's your invoice overview.
           </p>
         </div>
-        <Button onClick={() => navigate("/invoices/new")}>
+        <Button onClick={() => navigate("/invoices")}>
           Create Invoice
         </Button>
       </div>
