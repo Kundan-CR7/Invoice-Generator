@@ -1,36 +1,42 @@
 import fs from "fs";
 import PDFDocument from "pdfkit";
 import path from "path"
+import axios from "axios";
 
 const fontPath = path.resolve("assets/fonts/DejaVuSans.ttf");
 const logoPath = path.resolve("assets/logo.png");
 
-export function generateInvoice(invoice, pathh) {     
-    const doc = new PDFDocument({ size: "A4", margin: 50 });
+export async function generateInvoice(invoice, pathh) {
+  const doc = new PDFDocument({ size: "A4", margin: 50 });
 
-    doc.registerFont("Deja", fontPath);
-    doc.font("Deja"); 
+  doc.registerFont("Deja", fontPath);
+  doc.font("Deja");
 
+  await generateHeader(doc, invoice);
 
-    generateHeader(doc, invoice);
-    generateCustomerInformation(doc, invoice);
-    generateInvoiceTable(doc, invoice);
-    generateFooter(doc);
+  generateCustomerInformation(doc, invoice);
+  generateInvoiceTable(doc, invoice);
+  generateFooter(doc);
 
-    doc.pipe(fs.createWriteStream(pathh));
-    doc.end();
+  doc.pipe(fs.createWriteStream(pathh));
+  doc.end();
 }
 
-function generateHeader(doc, invoice) {
+const generateHeader = async(doc, invoice) => {
+  const response = await axios.get(invoice.company.logoUrl, {
+    responseType: "arraybuffer",
+  });
+  const imageBuffer = Buffer.from(response.data, "binary");
+
   doc
-    .image(logoPath, 50, 45, { width: 60 })
+    .image(imageBuffer, 50, 45, { width: 60 })
     .fillColor("#444444")
     .fontSize(20)
     .text(invoice.company.name || "Your Company", 120, 57)
     .fontSize(10)
-    .text(invoice.company.email || "", 200, 50, { align: "right" })
-    .text(invoice.company.address || "", 200, 65, { align: "right" })
-    .text(invoice.company.city || "", 200, 80, { align: "right" })
+    .text(invoice.company.email || "", 300, 50, { width: 250, align: "right" })
+    .text(invoice.company.address || "", 300, 65, { width: 250, align: "right" })
+    .text(invoice.company.city || "", 300, 95, { width: 250, align: "right" })
     .moveDown();
 }
 
