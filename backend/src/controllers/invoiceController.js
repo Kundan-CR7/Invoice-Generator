@@ -10,8 +10,18 @@ export const generateInvoicePDF = async (req, res) => {
     const { id } = req.params;
 
     const invoice = await prisma.invoice.findUnique({
-      where: { id },
-      include: { company: true, customer: true },
+    where: { id },
+    select: {
+        id: true,
+        number: true,
+        issueDate: true,
+        dueDate: true,
+        taxRate: true,
+        discount: true,
+        items: true,
+        company: { select: { name: true, email: true, address: true, logoUrl:true } },
+        customer: { select: { name: true, email: true, address: true } },
+    },
     });
 
     if (!invoice) return res.status(404).json({ error: "Invoice not found" });

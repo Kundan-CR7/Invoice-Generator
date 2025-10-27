@@ -45,7 +45,7 @@ export default function Invoices() {
       <button
         onClick={onClick}
         disabled={disabled}
-        className={`${base} bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md hover:shadow-lg focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed`}
+        className={`${base} bg-linear-to-r from-blue-500 to-purple-600 text-white shadow-md hover:shadow-lg focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed`}
       >
         {children}
       </button>
@@ -569,34 +569,44 @@ export default function Invoices() {
               <div>
                 <h3 className="text-lg text-center font-medium text-gray-900 dark:text-white mb-4">All Products</h3>
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 table-fixed">
                     <thead className="bg-gray-50 dark:bg-gray-800">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Product</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Company</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Price</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                        <th className="w-1/4 px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Company
+                        </th>
+                        <th className="w-1/4 px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Product
+                        </th>
+                        <th className="w-1/4 px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Price
+                        </th>
+                        <th className="w-1/4 px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                          Description
+                        </th>
                       </tr>
                     </thead>
+
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       {products.map((product) => (
                         <tr key={product.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white" style={{ color: '#ffffff' }}>
-                            {product.name}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white" style={{ color: '#ffffff' }}>
+                          <td className="w-1/4 px-6 py-4 text-center text-sm text-gray-900 dark:text-white">
                             {product.company?.name || '-'}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white" style={{ color: '#ffffff' }}>
+                          <td className="w-1/4 px-6 py-4 text-center text-sm font-medium text-gray-900 dark:text-white">
+                            {product.name}
+                          </td>
+                          <td className="w-1/4 px-6 py-4 text-center text-sm text-gray-900 dark:text-white">
                             ₹{product.price}
                           </td>
-                          <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">
+                          <td className="w-1/4 px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                             {product.description || '-'}
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+
                 </div>
               </div>
             </div>
