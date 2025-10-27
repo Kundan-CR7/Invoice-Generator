@@ -6,7 +6,6 @@ const menuItems = [
   { title: "Companies", icon: Building2, url: "/companies" },
   { title: "Customers", icon: Users, url: "/customers" },
   { title: "Invoices", icon: FileText, url: "/invoices" },
-  { title: "New Invoice", icon: Plus, url: "/invoices/new" },
   { title: "Settings", icon: Settings, url: "/settings" },
 ];
 
@@ -16,7 +15,7 @@ export function InvoiceSidebar() {
       {/* Header */}
       <div className="p-6 border-b border-gray-800">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
             <FileText className="w-6 h-6 text-white" />
           </div>
           <div>

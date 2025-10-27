@@ -26,7 +26,7 @@ input::placeholder, textarea::placeholder {
 
 /* Focus states */
 input:focus, textarea:focus, select:focus {
-  color: #000000 !important;
+  color: white !important;
   outline: none;
 }
 
@@ -39,7 +39,7 @@ input[type="date"],
 input[type="password"],
 textarea,
 select {
-  color: #000000 !important;
+  color: white !important;
 }
 
 input[type="text"]::placeholder, 

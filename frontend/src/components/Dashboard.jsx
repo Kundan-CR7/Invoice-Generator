@@ -80,6 +80,7 @@ export default function Dashboard() {
     try {
       setLoading(true);
       const res = await api.get("/invoices");
+      console.log("API response:", res.data);
       setInvoices(res.data || []);
     } catch (err) {
       console.error("Failed to fetch invoices:", err);
@@ -184,10 +185,10 @@ export default function Dashboard() {
           with ease.
         </p>
         <div className="flex gap-4">
-          <Button onClick={() => navigate("/invoices/new")}>
+          <Button onClick={() => navigate("/invoices")}>
             Create First Invoice
           </Button>
-          <Button variant="outline" onClick={() => navigate("/settings")}>
+          <Button variant="outline" onClick={() => navigate("/companies")}>
             Setup Company Info
           </Button>
         </div>
